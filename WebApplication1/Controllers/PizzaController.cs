@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -15,10 +16,17 @@ namespace WebApplication1.Controllers{
             _logger = logger;
         }
 
-        [HttpGet ("pizza")]
-        public IEnumerable<Pizza> Get(int ?id = null)
+        [HttpGet ("pizza/{id}")]
+        public ActionResult<IEnumerable<Pizza>> Get(int ?id = null)
         {
-            return PizzaService.GetOnePizzaOrAll(id);
+            try
+            {
+                return Ok(PizzaService.GetOnePizzaOrAll(id));
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

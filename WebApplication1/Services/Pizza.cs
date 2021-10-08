@@ -23,6 +23,4 @@ namespace WebApplication1.Services
             my_pizza.PriceEur = my_pizza.PriceUsd.ConverToEur();
         }
     }
-    
-    
 }
